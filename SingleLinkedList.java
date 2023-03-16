@@ -171,7 +171,14 @@ class SinglyLinkedList {
             return false;
         }
     }
+    //remove at index method
+    void remove(int index){
 
+    }
+    //clear list method
+    void clear(){
+
+    }
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -228,6 +235,20 @@ public class SingleLinkedList {
                 break;
             case "isEmpty":
                 System.out.print(list.isEmpty()? "True" : "False");
+                break;
+            case "size":
+                System.out.print(list.size());
+                break;
+            case "remove":
+                int remIndex = sc.nextInt();
+                try{
+                    list.remove(remIndex);
+                    list.printList();
+                }catch(Exception e){System.out.print("Error");}
+                break;
+            case "clear":
+                list.clear();
+                list.printList();
                 break;
             default:
             System.out.print("Error");
