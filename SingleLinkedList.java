@@ -51,16 +51,17 @@ interface ILinkedList {
     * @param toIndex
     * @return a view of the portion of this list between the specified fromIndex and toIndex, inclusively.
     */
-    //public ILinkedList sublist(int fromIndex, int toIndex);
+    public ILinkedList sublist(int fromIndex, int toIndex);
     /**
     * @param o
     * @return true if this list contains an element with the same value as the specified element.
     */
     public boolean contains(int o); 
+    void printList();
 
 }
 
-class SinglyLinkedList {
+class SinglyLinkedList implements ILinkedList{
 
     class Node{
         int Value;
@@ -83,7 +84,7 @@ class SinglyLinkedList {
     }
 
     //add to the end of the list
-    void add(int element){
+    public void add(int element){
         Node newNode = new Node(element);
         if(head.next == null){
             head.next = newNode;
@@ -97,7 +98,7 @@ class SinglyLinkedList {
         }
         newNode.next = tail;
     }
-    void addToIndex(int index , int element){
+    public void addToIndex(int index , int element){
         Node new_Node = new Node(element);
         if(index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException();
@@ -117,7 +118,7 @@ class SinglyLinkedList {
         }
     }
     //get the element by index
-    int get(int index){
+    public int get(int index){
         int value;
         if(index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException();
@@ -135,7 +136,7 @@ class SinglyLinkedList {
         
     }
     //set by index
-    void set(int index, int value){
+    public void set(int index, int value){
         if(index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException();
         }else{
@@ -150,7 +151,7 @@ class SinglyLinkedList {
     }
 
     //get the size of list
-    int size(){
+    public int size(){
         int res = 0;
         Node currentNode = head;
         while(currentNode.next != null && currentNode.next != tail){
@@ -161,14 +162,14 @@ class SinglyLinkedList {
     }
     
     //isEmpty method
-    boolean isEmpty(){
+    public boolean isEmpty(){
         if(this.size() == 0){
             return true;
         }else{
             return false;
         }
     }
-    boolean contains(int element){
+    public boolean contains(int element){
         Node currentCheck = head.next;
         while (currentCheck != tail) {
             if(currentCheck.Value == element)
@@ -178,7 +179,7 @@ class SinglyLinkedList {
         return false;
     }
     //remove at index method
-    void remove(int index){
+    public void remove(int index){
         if(index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException();
         }else{
@@ -196,13 +197,14 @@ class SinglyLinkedList {
         }
     }
     //clear list method
-    void clear(){
+    public void clear(){
         int size = this.size();
         for(int i = 0; i < size; i++){
             this.remove(0);
         }
     }
-    ILinkedList sublist(int start, int end){
+    @Override
+    public ILinkedList sublist(int start, int end){
         ILinkedList sub_list = new SinglyLinkedList();
         if(start > 0 && end < size() && start <= end){
             for(int i = start ; i <= end;i++){
@@ -215,7 +217,7 @@ class SinglyLinkedList {
         return sub_list;
     }
     //printing the linked list method
-    void printList() {
+    public void printList() {
         Node currNode = head;
         System.out.print("[");
         while (currNode.next != null && currNode.next != tail) {
@@ -227,8 +229,11 @@ class SinglyLinkedList {
         }
         System.out.print("]");
     }
+
+    
 }
-public class SingleLinkedList implements ILinkedList{
+
+public class SingleLinkedList{
     public static void main(String[] args){
         ILinkedList list = new SinglyLinkedList();
         Scanner sc = new Scanner(System.in);
@@ -292,13 +297,18 @@ public class SingleLinkedList implements ILinkedList{
             else
             System.out.print("False");
             break;
-            /*case "sublist":
-            SingleLinkedList New_list = list.sublist();
+            case "sublist":
+            int start = sc.nextInt();
+            int end = sc.nextInt();
+            ILinkedList New_list = new SinglyLinkedList();
+            New_list = list.sublist(start, end);
             New_list.printList();
-            break;*/
+            break;
             default:
             System.out.print("Error");
         } 
     }
+
+    
     
 }
