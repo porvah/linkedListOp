@@ -77,30 +77,38 @@ class SinglyLinkedList {
     Node head;
     Node tail;
     SinglyLinkedList(){
-        head.next = tail;
+        Node dummy = new Node(0);
+        this.head = dummy;
+        this.tail = dummy;
+        head.next = null;
         tail.next = null;
     }
 
     //add to the end of the list
     public void add(int element){
         Node newNode = new Node(element);
-        Node lastNode = head;
-        while(lastNode.next != tail){
-            lastNode = lastNode.next;
+        if(head.next == null){
+            head.next = newNode;
+        }else{
+            Node lastNode = head.next;
+            while(lastNode.next != tail){
+                lastNode = lastNode.next;
+            }
+            lastNode.next = newNode;
+            
         }
-        lastNode.next = newNode;
         newNode.next = tail;
     }
     //printing the linked list method
     void printList() {
         Node currNode = head;
         System.out.print("[");
-        while (currNode != null) {
-            if( currNode.next != null)
-            System.out.print(currNode.Value + ", ");
-            else
-            System.out.print(currNode.Value);
+        while (currNode.next != null && currNode.next != tail) {
             currNode = currNode.next;
+            System.out.print(currNode.Value);
+            if(currNode.next != tail){
+                System.out.print(", ");
+            }
         }
         System.out.print("]");
     }
