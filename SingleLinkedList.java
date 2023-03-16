@@ -182,18 +182,22 @@ public class SingleLinkedList {
         } 
         switch(oper){
             case "add":
-            String temp1 = sc.nextLine();
-            if(!temp1.equals("")){
-            int val1 = Integer.parseInt(temp1);
-            list.add(val1);}
-            list.printList();
-            break;
+                String temp1 = sc.nextLine();
+                if(!temp1.equals("")){
+                int val1 = Integer.parseInt(temp1);
+                list.add(val1);}
+                list.printList();
+                break;
             case "addToIndex":
-            int index = sc.nextInt();
-            int val2  = sc.nextInt();
-            list.addToIndex(index,val2);
-            list.printList();
-            break;
+                int index = sc.nextInt();
+                int val2  = sc.nextInt();
+                list.addToIndex(index,val2);
+                list.printList();
+                break;
+            case "get":
+                int getIndex = sc.nextInt();
+                System.out.print(list.get(getIndex)); 
+                break;
             default:
             System.out.print("Error");
         } 
