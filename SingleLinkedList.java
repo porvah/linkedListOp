@@ -167,6 +167,15 @@ class SinglyLinkedList {
         return res;
     }
     
+    //isEmpty method
+    boolean isEmpty(){
+        if(this.size() == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -218,7 +227,9 @@ public class SingleLinkedList {
                 list.set(setIndex, setVal);
                 list.printList();
                 break;
-            
+            case "isEmpty":
+                System.out.print(list.isEmpty()? "True" : "False");
+                break;
             default:
             System.out.print("Error");
         } 
