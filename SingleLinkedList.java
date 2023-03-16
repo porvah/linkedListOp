@@ -59,6 +59,12 @@ import java.util.regex.*;
     //public boolean contains(Object o); 
 
 }
+
+
+
+
+class SinglyLinkedList {
+
     class Node{
         int Value;
         Node next;
@@ -68,26 +74,22 @@ import java.util.regex.*;
         }
     }
 
-class SinglyLinkedList {
     Node head;
     Node tail;
     SinglyLinkedList(){
-        this.head.next = tail;
-        this.tail.next = null;
+        head.next = tail;
+        tail.next = null;
     }
-        //add to the end of the list
 
+    //add to the end of the list
     public void add(int element){
         Node newNode = new Node(element);
-        if(head == null){   //the list is empty
-            head = newNode;
-            return; // end of the method
+        Node lastNode = head;
+        while(lastNode.next != tail){
+            lastNode = lastNode.next;
         }
-        Node currentCheck = head;
-        while(currentCheck.next != null){
-            currentCheck = currentCheck.next;
-        } // until i access last Node
-        currentCheck.next = newNode;
+        lastNode.next = newNode;
+        newNode.next = tail;
     }
     //printing the linked list method
     void printList() {
@@ -103,6 +105,7 @@ class SinglyLinkedList {
         System.out.print("]");
     }
 }
+
 public class SingleLinkedList {
     public static void main(String[] args){
         SinglyLinkedList list = new SinglyLinkedList();
