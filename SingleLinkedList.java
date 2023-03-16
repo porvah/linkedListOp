@@ -169,13 +169,13 @@ class SinglyLinkedList {
         }
     }
     boolean contains(int element){
-    Node currentCheck = head.next;
-    while (currentCheck != tail) {
-        if(currentCheck.Value == element)
-        return true;
-        currentCheck = currentCheck.next;
-    }
-    return false;
+        Node currentCheck = head.next;
+        while (currentCheck != tail) {
+            if(currentCheck.Value == element)
+            return true;
+            currentCheck = currentCheck.next;
+        }
+        return false;
     }
     //remove at index method
     void remove(int index){
