@@ -78,9 +78,10 @@ class SinglyLinkedList {
     Node tail;
     SinglyLinkedList(){
         Node dummy = new Node(0);
+        Node tailDummy = this.tail;
         this.head = dummy;
         this.tail = dummy;
-        head.next = null;
+        head.next = tailDummy;
         tail.next = null;
     }
 
