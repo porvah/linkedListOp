@@ -101,27 +101,22 @@ class SinglyLinkedList {
     }
     public void addToIndex(int index , int element){
         Node new_Node = new Node(element);
-
-        if (index == 0) {
+        if(index < 0 || index >= this.size()){
+            throw new IndexOutOfBoundsException();
+        }
+        else{
+        if (index == 0){
             new_Node.next = head.next;
             head.next = new_Node;
             return;
         }
-
         Node currentCheck = head;
-        for (int i = 0; i < index ; i++) {
-            if (currentCheck == null) {
-                throw new IndexOutOfBoundsException("Index out of range");
-            }
+        for(int i = 0; i < index ;i++){
             currentCheck = currentCheck.next;
         }
-
-        if (currentCheck == null) {
-            throw new IndexOutOfBoundsException("Index out of range");
-        }
-
         new_Node.next = currentCheck.next;
         currentCheck.next = new_Node;
+        }
     }
     //get the element by index
     int get(int index){
@@ -214,12 +209,15 @@ public class SingleLinkedList {
             case "addToIndex":
                 int index = sc.nextInt();
                 int val2  = sc.nextInt();
-                list.addToIndex(index,val2);
+                try{list.addToIndex(index,val2);
                 list.printList();
+                }catch(Exception e){System.out.print("Error");}
                 break;
             case "get":
                 int getIndex = sc.nextInt();
-                System.out.print(list.get(getIndex)); 
+                try{
+                System.out.print(list.get(getIndex));
+                }catch(Exception e){System.out.print("Error");}
                 break;
             case "set":
                 int setIndex = sc.nextInt();
