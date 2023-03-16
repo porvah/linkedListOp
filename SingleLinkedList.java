@@ -121,12 +121,18 @@ public class SingleLinkedList {
         String str = sc.nextLine();
         String oper = sc.nextLine();
         String Value_1 = sc.nextLine();
+        if(str.equals("[]")){
+            str = str.replace("[", "").replace("]", "");
+            String[] s = str.split(", ");
+            for(int i = 0; i < s.length; i++){
+                list.add(Integer.parseInt(s[i]));
+            }
+        }
         str = str.replace("[", "").replace("]", "");
         String[] s = str.split(", ");
         for(int i = 0; i < s.length; i++){
             list.add(Integer.parseInt(s[i]));
         }
         list.printList();
-
     }
 }
