@@ -141,6 +141,20 @@ class SinglyLinkedList {
 
         
     }
+    //set by index
+    void set(int index, int value){
+        if(index < 0 || index >= this.size()){
+            throw new IndexOutOfBoundsException();
+        }else{
+            Node currentNode = this.head;
+            while(index >= 0){
+                currentNode = currentNode.next;
+
+                index--;
+            }
+            currentNode.Value = value;
+        }
+    }
 
     //get the size of list
     int size(){
@@ -198,6 +212,13 @@ public class SingleLinkedList {
                 int getIndex = sc.nextInt();
                 System.out.print(list.get(getIndex)); 
                 break;
+            case "set":
+                int setIndex = sc.nextInt();
+                int setVal = sc.nextInt();
+                list.set(setIndex, setVal);
+                list.printList();
+                break;
+            
             default:
             System.out.print("Error");
         } 
