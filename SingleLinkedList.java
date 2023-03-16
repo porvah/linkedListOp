@@ -179,11 +179,28 @@ class SinglyLinkedList {
     }
     //remove at index method
     void remove(int index){
+        if(index < 0 || index >= this.size()){
+            throw new IndexOutOfBoundsException();
+        }else{
+            Node prevNode = this.head;
+            Node currentNode = this.head.next;
+            while(index > 0){
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+                index--;
+            }
+            Node nextNode = currentNode.next;
+            prevNode.next = nextNode;
+            currentNode.next = null;
 
+        }
     }
     //clear list method
     void clear(){
-
+        int size = this.size();
+        for(int i = 0; i < size; i++){
+            this.remove(0);
+        }
     }
     //printing the linked list method
     void printList() {
