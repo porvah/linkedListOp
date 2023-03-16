@@ -99,6 +99,27 @@ class SinglyLinkedList {
         }
         newNode.next = tail;
     }
+    public void addToIndex(int index , int element){
+        Node new_Node = new Node(element);
+        if (index == 0) {
+            new_Node.next = head.next;
+            head.next = new_Node;
+        }
+        Node currentCheck = head.next;
+        for (int i = 0; i < index - 1; i++) {
+            if (currentCheck != null)
+            break;
+            currentCheck = currentCheck.next;
+        }
+        if (currentCheck == null) { //check if im at the tail
+        new_Node.next = currentCheck.next;
+        currentCheck.next = new_Node;}
+        else{
+        p * index = -1;
+        System.out.println("Error");
+        }
+    }
+    
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -113,26 +134,40 @@ class SinglyLinkedList {
         System.out.print("]");
     }
 }
-
 public class SingleLinkedList {
     public static void main(String[] args){
         SinglyLinkedList list = new SinglyLinkedList();
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         String oper = sc.nextLine();
-        String Value_1 = sc.nextLine();
-        if(str.equals("[]")){
+        if(!str.equals("[]")){
             str = str.replace("[", "").replace("]", "");
             String[] s = str.split(", ");
             for(int i = 0; i < s.length; i++){
                 list.add(Integer.parseInt(s[i]));
-            }
-        }
-        str = str.replace("[", "").replace("]", "");
-        String[] s = str.split(", ");
-        for(int i = 0; i < s.length; i++){
-            list.add(Integer.parseInt(s[i]));
-        }
-        list.printList();
+                }
+        } 
+        switch(oper){
+            case "add":
+            String temp1 = sc.nextLine();
+            if(!temp1.equals("")){
+            int val1 = Integer.parseInt(temp1);
+            list.add(val1);}
+            list.printList();
+            break;
+            case "addToIndex":
+            String temp2 = sc.nextLine();
+            String temp_2 = sc.nextLine();
+            int index = Integer.parseInt(temp2);
+            int val2 = Integer.parseInt(temp_2);
+            list.addToIndex(index,val2);
+            if(index > 0)
+            System.out.println(index);
+            list.printList();
+            break;
+            default:
+            System.out.print("Error");
+        } 
     }
+    
 }
