@@ -170,8 +170,8 @@ class SinglyLinkedList implements ILinkedList{
         }
     }
     public boolean contains(int element){
-        Node currentCheck = head.next;
-        while (currentCheck != tail) {
+        Node currentCheck = this.head.next;
+        while (currentCheck != this.tail && currentCheck != null) {
             if(currentCheck.Value == element)
             return true;
             currentCheck = currentCheck.next;
@@ -206,7 +206,7 @@ class SinglyLinkedList implements ILinkedList{
     @Override
     public ILinkedList sublist(int start, int end){
         ILinkedList sub_list = new SinglyLinkedList();
-        if(start > 0 && end < size() && start <= end){
+        if(start >= 0 && end < size() && start <= end){
             for(int i = start ; i <= end;i++){
                 sub_list.add(this.get(i));
             }
@@ -270,8 +270,10 @@ public class SingleLinkedList{
             case "set":
                 int setIndex = sc.nextInt();
                 int setVal = sc.nextInt();
+                try{
                 list.set(setIndex, setVal);
                 list.printList();
+                }catch(Exception e){System.out.println("Error");}
                 break;
             case "isEmpty":
                 System.out.print(list.isEmpty()? "True" : "False");
@@ -301,14 +303,13 @@ public class SingleLinkedList{
             int start = sc.nextInt();
             int end = sc.nextInt();
             ILinkedList New_list = new SinglyLinkedList();
+            try{
             New_list = list.sublist(start, end);
             New_list.printList();
+            }catch(Exception e){System.out.println("Error");}
             break;
             default:
             System.out.print("Error");
         } 
     }
-
-    
-    
 }
