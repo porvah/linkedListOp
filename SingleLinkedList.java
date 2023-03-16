@@ -15,7 +15,7 @@ import java.util.regex.*;
     * Inserts the specified element at the end of the list.
     * @param element
     */
-    public void add(int element);
+    //public void add(int element);
     /**
     * @param index
     * @return the element at the specified position in this list.
@@ -60,9 +60,6 @@ import java.util.regex.*;
 
 }
 
-
-
-
 class SinglyLinkedList {
 
     class Node{
@@ -86,7 +83,7 @@ class SinglyLinkedList {
     }
 
     //add to the end of the list
-    public void add(int element){
+    void add(int element){
         Node newNode = new Node(element);
         if(head.next == null){
             head.next = newNode;
@@ -100,7 +97,7 @@ class SinglyLinkedList {
         }
         newNode.next = tail;
     }
-    public void addToIndex(int index , int element){
+    void addToIndex(int index , int element){
         Node new_Node = new Node(element);
         if(index < 0 || index >= this.size()){
             throw new IndexOutOfBoundsException();
@@ -170,6 +167,15 @@ class SinglyLinkedList {
         }else{
             return false;
         }
+    }
+    boolean contains(int element){
+    Node currentCheck = head.next;
+    while (currentCheck != tail) {
+        if(currentCheck.Value == element)
+        return true;
+        currentCheck = currentCheck.next;
+    }
+    return false;
     }
     //remove at index method
     void remove(int index){
@@ -250,6 +256,15 @@ public class SingleLinkedList {
                 list.clear();
                 list.printList();
                 break;
+            case "contains":
+            int val3 = sc.nextInt();
+            if(list.contains(val3))
+            System.out.print("True");
+            else
+            System.out.print("False");
+            break;
+            /*case "sublist":
+            list.sublist();*/
             default:
             System.out.print("Error");
         } 
