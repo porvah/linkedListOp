@@ -77,7 +77,6 @@ class SinglyLinkedList {
     Node head;
     Node tail;
     SinglyLinkedList(){
-        
         Node dummy = new Node(0);
         this.head = dummy;
         this.tail = dummy;
@@ -102,55 +101,30 @@ class SinglyLinkedList {
     }
     public void addToIndex(int index , int element){
         Node new_Node = new Node(element);
+
         if (index == 0) {
             new_Node.next = head.next;
             head.next = new_Node;
+            return;
         }
-        Node currentCheck = head.next;
-        for (int i = 0; i < index - 1; i++) {
-            if (currentCheck != null)
-            break;
+
+        Node currentCheck = head;
+        for (int i = 0; i < index ; i++) {
+            if (currentCheck == null) {
+                throw new IndexOutOfBoundsException("Index out of range");
+            }
             currentCheck = currentCheck.next;
         }
-        if (currentCheck == null) { //check if im at the tail
-        new_Node.next = currentCheck.next;
-        currentCheck.next = new_Node;}
-        else{
-        //p * index = -1;
-        System.out.println("Error");
+
+        if (currentCheck == null) {
+            throw new IndexOutOfBoundsException("Index out of range");
         }
+
+        new_Node.next = currentCheck.next;
+        currentCheck.next = new_Node;
     }
     
-
-    //get the element by index
-    int get(int index){
-        int value;
-        if(index < 0 || index >= this.size()){
-            throw new IndexOutOfBoundsException();
-        }else{
-            Node currentNode = this.head;
-            while(index >= 0){
-                currentNode = currentNode.next;
-
-                index--;
-            }
-            value = currentNode.Value;
-            return value;
-        }
-
-        
-    }
-
-    //get the size of list
-    int size(){
-        int res = 0;
-        Node currentNode = head;
-        while(currentNode.next != null && currentNode.next != tail){
-            currentNode = currentNode.next;
-            res++;
-        }
-        return res;
-    }
+    
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -180,29 +154,18 @@ public class SingleLinkedList {
         } 
         switch(oper){
             case "add":
-                String temp1 = sc.nextLine();
-                if(!temp1.equals("")){
-                int val1 = Integer.parseInt(temp1);
-                list.add(val1);}
-                list.printList();
-                break;
+            String temp1 = sc.nextLine();
+            if(!temp1.equals("")){
+            int val1 = Integer.parseInt(temp1);
+            list.add(val1);}
+            list.printList();
+            break;
             case "addToIndex":
-                String temp2 = sc.nextLine();
-                String temp_2 = sc.nextLine();
-                int index = Integer.parseInt(temp2);
-                int val2 = Integer.parseInt(temp_2);
-                list.addToIndex(index,val2);
-                if(index > 0)
-                System.out.println(index);
-                list.printList();
-                break;
-            case "get":
-                int getI = sc.nextInt();
-                System.out.print(list.get(getI));
-                break;
-            case "size":
-                System.out.print(list.size());
-                break;
+            int index = sc.nextInt();
+            int val2  = sc.nextInt();
+            list.addToIndex(index,val2);
+            list.printList();
+            break;
             default:
             System.out.print("Error");
         } 
