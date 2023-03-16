@@ -5,75 +5,77 @@ import java.math.*;
 import java.util.regex.*;
 
   interface ILinkedList {
-/**
-* Inserts a specified element at the specified position in the list.
-* @param index
-* @param element
-*/
-//public void add(int index, Object element);
-/**
-* Inserts the specified element at the end of the list.
-* @param element
-*/
-public void add(int element);
-/**
-* @param index
-* @return the element at the specified position in this list.
-*/
-/*public Object get(int index);
+    /**
+    * Inserts a specified element at the specified position in the list.
+    * @param index
+    * @param element
+    */
+    //public void add(int index, Object element);
+    /**
+    * Inserts the specified element at the end of the list.
+    * @param element
+    */
+    public void add(int element);
+    /**
+    * @param index
+    * @return the element at the specified position in this list.
+    */
+    /*public Object get(int index);
 
-/**
-* Replaces the element at the specified position in this list with the
-* specified element.
-* @param index
-* @param element
-*/
-//public void set(int index, Object element);
-/**
-* Removes all of the elements from this list.
-*/
-//public void clear();
-/**
-* @return true if this list contains no elements.
-*/
-//public boolean isEmpty();
-/**
-* Removes the element at the specified position in this list.
-* @param index
-*/
-//public void remove(int index);
-/**
-* @return the number of elements in this list.
-*/
-//public int size();
-/**
-* @param fromIndex
-* @param toIndex
-* @return a view of the portion of this list between the specified fromIndex and toIndex, inclusively.
-*/
-//public ILinkedList sublist(int fromIndex, int toIndex);
-/**
-* @param o
-* @return true if this list contains an element with the same value as the specified element.
-*/
-//public boolean contains(Object o); 
+    /**
+    * Replaces the element at the specified position in this list with the
+    * specified element.
+    * @param index
+    * @param element
+    */
+    //public void set(int index, Object element);
+    /**
+    * Removes all of the elements from this list.
+    */
+    //public void clear();
+    /**
+    * @return true if this list contains no elements.
+    */
+    //public boolean isEmpty();
+    /**
+    * Removes the element at the specified position in this list.
+    * @param index
+    */
+    //public void remove(int index);
+    /**
+    * @return the number of elements in this list.
+    */
+    //public int size();
+    /**
+    * @param fromIndex
+    * @param toIndex
+    * @return a view of the portion of this list between the specified fromIndex and toIndex, inclusively.
+    */
+    //public ILinkedList sublist(int fromIndex, int toIndex);
+    /**
+    * @param o
+    * @return true if this list contains an element with the same value as the specified element.
+    */
+    //public boolean contains(Object o); 
 
 }
     class Node{
-    int Value;
-    Node next;
-    Node(int Value){
-        this.Value = Value;
-        this.next = null;
-    }
+        int Value;
+        Node next;
+        Node(int Value){
+            this.Value = Value;
+            this.next = null;
+        }
     }
 
-    class SinglyLinkedList {
+class SinglyLinkedList {
     Node head;
+    Node tail;
     SinglyLinkedList(){
-        this.head = null;
+        this.head.next = tail;
+        this.tail.next = null;
     }
-    //add to the end of the list
+        //add to the end of the list
 
     public void add(int element){
         Node newNode = new Node(element);
@@ -88,7 +90,7 @@ public void add(int element);
         currentCheck.next = newNode;
     }
     //printing the linked list method
-        void printList() {
+    void printList() {
         Node currNode = head;
         System.out.print("[");
         while (currNode != null) {
@@ -100,8 +102,8 @@ public void add(int element);
         }
         System.out.print("]");
     }
-    }
-    public class SingleLinkedList {
+}
+public class SingleLinkedList {
     public static void main(String[] args){
         SinglyLinkedList list = new SinglyLinkedList();
         Scanner sc = new Scanner(System.in);
@@ -115,5 +117,5 @@ public void add(int element);
         }
         list.add(356);
         list.printList();
-        }
     }
+}
