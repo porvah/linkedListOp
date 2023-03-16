@@ -123,7 +123,35 @@ class SinglyLinkedList {
         new_Node.next = currentCheck.next;
         currentCheck.next = new_Node;
     }
-    
+    //get the element by index
+    int get(int index){
+        int value;
+        if(index < 0 || index >= this.size()){
+            throw new IndexOutOfBoundsException();
+        }else{
+            Node currentNode = this.head;
+            while(index >= 0){
+                currentNode = currentNode.next;
+
+                index--;
+            }
+            value = currentNode.Value;
+            return value;
+        }
+
+        
+    }
+
+    //get the size of list
+    int size(){
+        int res = 0;
+        Node currentNode = head;
+        while(currentNode.next != null && currentNode.next != tail){
+            currentNode = currentNode.next;
+            res++;
+        }
+        return res;
+    }
     
     //printing the linked list method
     void printList() {
