@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public interface ILinkedList {
+interface ILinkedList {
     /**
     * Inserts a specified element at the specified position in the list.
     * @param index
