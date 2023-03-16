@@ -101,24 +101,29 @@ class SinglyLinkedList {
     }
     public void addToIndex(int index , int element){
         Node new_Node = new Node(element);
+
         if (index == 0) {
             new_Node.next = head.next;
             head.next = new_Node;
+            return;
         }
-        Node currentCheck = head.next;
-        for (int i = 0; i < index - 1; i++) {
-            if (currentCheck != null)
-            break;
+
+        Node currentCheck = head;
+        for (int i = 0; i < index ; i++) {
+            if (currentCheck == null) {
+                throw new IndexOutOfBoundsException("Index out of range");
+            }
             currentCheck = currentCheck.next;
         }
-        if (currentCheck == null) { //check if im at the tail
-        new_Node.next = currentCheck.next;
-        currentCheck.next = new_Node;}
-        else{
-        p * index = -1;
-        System.out.println("Error");
+
+        if (currentCheck == null) {
+            throw new IndexOutOfBoundsException("Index out of range");
         }
+
+        new_Node.next = currentCheck.next;
+        currentCheck.next = new_Node;
     }
+    
     
     //printing the linked list method
     void printList() {
@@ -156,13 +161,9 @@ public class SingleLinkedList {
             list.printList();
             break;
             case "addToIndex":
-            String temp2 = sc.nextLine();
-            String temp_2 = sc.nextLine();
-            int index = Integer.parseInt(temp2);
-            int val2 = Integer.parseInt(temp_2);
+            int index = sc.nextInt();
+            int val2  = sc.nextInt();
             list.addToIndex(index,val2);
-            if(index > 0)
-            System.out.println(index);
             list.printList();
             break;
             default:
