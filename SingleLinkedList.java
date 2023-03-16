@@ -126,7 +126,7 @@ public class SingleLinkedList {
         for(int i = 0; i < s.length; i++){
             list.add(Integer.parseInt(s[i]));
         }
-        list.add(356);
         list.printList();
+
     }
 }
