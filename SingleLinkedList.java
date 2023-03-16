@@ -10,17 +10,17 @@ import java.util.regex.*;
     * @param index
     * @param element
     */
-    //public void add(int index, Object element);
+    public void addToIndex(int index, int element);
     /**
     * Inserts the specified element at the end of the list.
     * @param element
     */
-    //public void add(int element);
+    public void add(int element);
     /**
     * @param index
     * @return the element at the specified position in this list.
     */
-    /*public Object get(int index);
+    public int get(int index);
 
     /**
     * Replaces the element at the specified position in this list with the
@@ -28,24 +28,24 @@ import java.util.regex.*;
     * @param index
     * @param element
     */
-    //public void set(int index, Object element);
+    public void set(int index, int element);
     /**
     * Removes all of the elements from this list.
     */
-    //public void clear();
+    public void clear();
     /**
     * @return true if this list contains no elements.
     */
-    //public boolean isEmpty();
+    public boolean isEmpty();
     /**
     * Removes the element at the specified position in this list.
     * @param index
     */
-    //public void remove(int index);
+    public void remove(int index);
     /**
     * @return the number of elements in this list.
     */
-    //public int size();
+    public int size();
     /**
     * @param fromIndex
     * @param toIndex
@@ -56,7 +56,7 @@ import java.util.regex.*;
     * @param o
     * @return true if this list contains an element with the same value as the specified element.
     */
-    //public boolean contains(Object o); 
+    public boolean contains(int o); 
 
 }
 
@@ -168,14 +168,15 @@ class SinglyLinkedList {
             return false;
         }
     }
+    @Override
     boolean contains(int element){
-    Node currentCheck = head.next;
-    while (currentCheck != tail) {
-        if(currentCheck.Value == element)
-        return true;
-        currentCheck = currentCheck.next;
-    }
-    return false;
+        Node currentCheck = head.next;
+        while (currentCheck != tail) {
+            if(currentCheck.Value == element)
+            return true;
+            currentCheck = currentCheck.next;
+        }
+        return false;
     }
     //remove at index method
     void remove(int index){
@@ -202,6 +203,18 @@ class SinglyLinkedList {
             this.remove(0);
         }
     }
+    /*ILinkedList sublist(int start, int end){
+        SinglyLinkedList sub_list = new SinglyLinkedList();
+        if(start > 0 && end < size() && start <= end){
+            for(int i = start ; i <= end;i++){
+                sub_list.add(this.get(i));
+            }
+        }
+        else{
+            throw new IndexOutOfBoundsException();
+        }
+        return sub_list;
+    }*/
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -216,7 +229,7 @@ class SinglyLinkedList {
         System.out.print("]");
     }
 }
-public class SingleLinkedList {
+public class SingleLinkedList implements ILinkedList{
     public static void main(String[] args){
         SinglyLinkedList list = new SinglyLinkedList();
         Scanner sc = new Scanner(System.in);
@@ -281,7 +294,9 @@ public class SingleLinkedList {
             System.out.print("False");
             break;
             /*case "sublist":
-            list.sublist();*/
+            SingleLinkedList New_list = list.sublist();
+            New_list.printList();
+            break;*/
             default:
             System.out.print("Error");
         } 
