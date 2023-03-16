@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-  interface ILinkedList {
+public interface ILinkedList {
     /**
     * Inserts a specified element at the specified position in the list.
     * @param index
@@ -168,7 +168,6 @@ class SinglyLinkedList {
             return false;
         }
     }
-    @Override
     boolean contains(int element){
         Node currentCheck = head.next;
         while (currentCheck != tail) {
@@ -203,8 +202,8 @@ class SinglyLinkedList {
             this.remove(0);
         }
     }
-    /*ILinkedList sublist(int start, int end){
-        SinglyLinkedList sub_list = new SinglyLinkedList();
+    ILinkedList sublist(int start, int end){
+        ILinkedList sub_list = new SinglyLinkedList();
         if(start > 0 && end < size() && start <= end){
             for(int i = start ; i <= end;i++){
                 sub_list.add(this.get(i));
@@ -214,7 +213,7 @@ class SinglyLinkedList {
             throw new IndexOutOfBoundsException();
         }
         return sub_list;
-    }*/
+    }
     //printing the linked list method
     void printList() {
         Node currNode = head;
@@ -231,7 +230,7 @@ class SinglyLinkedList {
 }
 public class SingleLinkedList implements ILinkedList{
     public static void main(String[] args){
-        SinglyLinkedList list = new SinglyLinkedList();
+        ILinkedList list = new SinglyLinkedList();
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         String oper = sc.nextLine();
