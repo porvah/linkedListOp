@@ -339,13 +339,16 @@ public class PolynomialSolver implements IPolynomialSolver{
             throw new Exception();
         }
     }
-//comment 3beet
+
     @Override
     public void setPolynomial(char poly, int[][] terms) throws Exception {
+        ILinkedList list = new DoubleLinkedList();
         try{
-            ILinkedList list = listFinder(poly);
+            list = listFinder(poly);
         }catch(Exception e){throw new Exception();}
-
+        for(int i = 0; i < terms.length; i++){
+            list.add(terms[i][0]);
+        }
     }
 
     @Override
