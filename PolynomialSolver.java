@@ -219,7 +219,7 @@ interface IPolynomialSolver {
   
     String print(char poly) throws Exception;
   
-    void clearPolynomial(char poly);
+    void clearPolynomial(char poly) throws Exception;
   
     float evaluatePolynomial(char poly, float value);
   
@@ -368,8 +368,12 @@ public class PolynomialSolver implements IPolynomialSolver{
     }
 
     @Override
-    public void clearPolynomial(char poly) {
-        
+    public void clearPolynomial(char poly) throws Exception {
+        ILinkedList list = new DoubleLinkedList();
+        try{
+            list = listFinder(poly);
+        }catch(Exception e){throw new Exception();}
+        list.clear();
     }
 
     @Override
