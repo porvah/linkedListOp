@@ -344,7 +344,7 @@ public class PolynomialSolver implements IPolynomialSolver{
         try{
             ILinkedList list = listFinder(poly);
         }catch(Exception e){throw new Exception();}
-
+        
     }
 
     @Override
