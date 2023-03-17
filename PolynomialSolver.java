@@ -215,7 +215,7 @@ class DoubleLinkedList implements ILinkedList {
 
 interface IPolynomialSolver {
     
-    void setPolynomial(char poly, int[][] terms);
+    void setPolynomial(char poly, int[][] terms) throws Exception;
   
     String print(char poly);
   
@@ -254,12 +254,17 @@ public class PolynomialSolver implements IPolynomialSolver{
                             setArr[i][0] = Integer.parseInt(setString[i]);
                             setArr[i][1] = setString.length - 1 - i;
                         }
-                        solver.setPolynomial(setPolyChar, setArr);
+                        try{
+                            solver.setPolynomial(setPolyChar, setArr);
+                        }catch(Exception e){
+                            System.out.println("Error");
+                        }
+                        
                     }
                     break;
                 case "print":
                     char printPolyChar = sc.nextLine().toCharArray()[0];
-                    System.out.println(solver.print(printPolyChar));
+                    try{System.out.println(solver.print(printPolyChar));}catch(Exception e){System.out.println("Error");}
                     break;
                 case "add":
                     char addCharA = sc.nextLine().toCharArray()[0];
@@ -290,13 +295,18 @@ public class PolynomialSolver implements IPolynomialSolver{
                     break;
                 case "clear":
                     char clearChar = sc.nextLine().toCharArray()[0];
-                    solver.clearPolynomial(clearChar);
-                    System.out.println(solver.print(clearChar));
+                    try{
+                        solver.clearPolynomial(clearChar);
+                        System.out.println(solver.print(clearChar));
+                    }catch(Exception e){System.out.println("Error");}
                     break;
                 case "eval":
                     char evalChar = sc.nextLine().toCharArray()[0];
                     float evalValue = sc.nextFloat();
-                    System.out.println(solver.evaluatePolynomial(evalChar, evalValue));
+                    try{
+                        System.out.println(solver.evaluatePolynomial(evalChar, evalValue));
+                    }catch(Exception e){System.out.println("Error");}
+                    
                     break;
                 default:
                     System.out.println("Error");
@@ -304,10 +314,37 @@ public class PolynomialSolver implements IPolynomialSolver{
         }
         sc.close();
     }
-
+    ILinkedList listFinder(char poly) throws Exception{
+        ILinkedList myList = new DoubleLinkedList();
+        boolean found = true;
+        switch(poly){
+            case 'A':
+                myList = A;
+                break;
+            case 'B':
+                myList = B;
+                break;
+            case 'C':
+                myList = C;
+                break;
+            case 'R':
+                myList = R;
+                break;
+            default:
+                found = false;
+        }
+        if(found){
+            return myList;
+        }else{
+            throw new Exception();
+        }
+    }
     @Override
-    public void setPolynomial(char poly, int[][] terms) {
-   
+    public void setPolynomial(char poly, int[][] terms) throws Exception {
+        try{
+            ILinkedList list = listFinder(poly);
+        }catch(Exception e){throw new Exception();}
+
     }
 
     @Override
