@@ -245,7 +245,7 @@ public class PolynomialSolver implements IPolynomialSolver{
                 case "set":
                     char setPolyChar = sc.nextLine().toCharArray()[0];
                     String setstr = sc.nextLine();
-                    
+                  
                     String[] setString = setstr.replace("[", "").replace("]", "").split(",");
                     int[][] setArr = new int[setString.length][2];
                     if(!str.equals("[]")){
@@ -253,12 +253,12 @@ public class PolynomialSolver implements IPolynomialSolver{
                             setArr[i][0] = Integer.parseInt(setString[i]);
                             setArr[i][1] = setString.length - 1 - i;
                         }
+                        solver.setPolynomial(setPolyChar, setArr);
                     }
-                    solver.setPolynomial(setPolyChar, setArr);
                     break;
                 case "print":
                     char printPolyChar = sc.nextLine().toCharArray()[0];
-                    System.out.print(solver.print(printPolyChar));
+                    System.out.println(solver.print(printPolyChar));
                     break;
                 case "add":
                     char addCharA = sc.nextLine().toCharArray()[0];
@@ -266,7 +266,7 @@ public class PolynomialSolver implements IPolynomialSolver{
                     try{
                         int[][] addRes = solver.add(addCharA, addCharB);
                         solver.setPolynomial('R', addRes);
-                        System.out.print(solver.print('R'));
+                        System.out.println(solver.print('R'));
                     }catch(Exception e){System.out.print("Error");}
                     break;
                 case "sub":
@@ -275,7 +275,7 @@ public class PolynomialSolver implements IPolynomialSolver{
                     try{
                         int[][] subRes = solver.subtract(subCharA, subCharB);
                         solver.setPolynomial('R', subRes);
-                        System.out.print(solver.print('R'));
+                        System.out.println(solver.print('R'));
                     }catch(Exception e){System.out.print("Error");}
                     break;
                 case "mult":
@@ -284,21 +284,21 @@ public class PolynomialSolver implements IPolynomialSolver{
                     try{
                         int[][] multRes = solver.multiply(multCharA, multCharB);
                         solver.setPolynomial('R', multRes);
-                        System.out.print(solver.print('R'));
+                        System.out.println(solver.print('R'));
                     }catch(Exception e){System.out.print("Error");}
                     break;
                 case "clear":
                     char clearChar = sc.nextLine().toCharArray()[0];
                     solver.clearPolynomial(clearChar);
-                    solver.print(clearChar);
+                    System.out.println(solver.print(clearChar));
                     break;
                 case "eval":
                     char evalChar = sc.nextLine().toCharArray()[0];
                     float evalValue = sc.nextFloat();
-                    System.out.print(solver.evaluatePolynomial(evalChar, evalValue));
+                    System.out.println(solver.evaluatePolynomial(evalChar, evalValue));
                     break;
                 default:
-                    System.out.print("Error");
+                    System.out.println("Error");
             }
         }
         sc.close();
