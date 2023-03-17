@@ -217,7 +217,7 @@ interface IPolynomialSolver {
     
     void setPolynomial(char poly, int[][] terms) throws Exception;
   
-    String print(char poly);
+    String print(char poly) throws Exception;
   
     void clearPolynomial(char poly);
   
@@ -339,23 +339,21 @@ public class PolynomialSolver implements IPolynomialSolver{
             throw new Exception();
         }
     }
-    
-//comment 3beet
     @Override
     public void setPolynomial(char poly, int[][] terms) throws Exception {
-        ILinkedList list = new DoubleLinkedList();
         try{
-            list = listFinder(poly);
+            ILinkedList list = listFinder(poly);
         }catch(Exception e){throw new Exception();}
-        for(int i = 0; i < terms.length; i++){
-            list.add(terms[i][0]);
-        }
+        
     }
 
     @Override
-    public String print(char poly) {
+    public String print(char poly) throws Exception {
         // TODO Auto-generated method stub
-        ILinkedList list = listFinder(poly);
+        ILinkedList list = new DoubleLinkedList();
+        try{
+            list = listFinder(poly);
+        }catch(Exception e){throw new Exception()}
         String str_print = "[";
         for(int i = 0; i < list.size(); i++){
             str_print += (char) list.get(i);
@@ -364,7 +362,6 @@ public class PolynomialSolver implements IPolynomialSolver{
         }
         str_print += "]"
         return str_print;
-        throw new UnsupportedOperationException("Unimplemented method 'print'");
     }
 
     @Override
