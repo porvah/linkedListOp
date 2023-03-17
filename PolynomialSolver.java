@@ -341,26 +341,29 @@ public class PolynomialSolver implements IPolynomialSolver{
     }
     @Override
     public void setPolynomial(char poly, int[][] terms) throws Exception {
+        ILinkedList list = new DoubleLinkedList();
         try{
-            ILinkedList list = listFinder(poly);
+            list = listFinder(poly);
+            
         }catch(Exception e){throw new Exception();}
-        
+        for(int i = 0; i < terms.length; i++){
+            list.add(terms[i][0]);
+        }
     }
 
     @Override
     public String print(char poly) throws Exception {
-        // TODO Auto-generated method stub
         ILinkedList list = new DoubleLinkedList();
         try{
             list = listFinder(poly);
-        }catch(Exception e){throw new Exception()}
+        }catch(Exception e){throw new Exception();}
         String str_print = "[";
         for(int i = 0; i < list.size(); i++){
-            str_print += (char) list.get(i);
+            str_print += String.valueOf( list.get(i));
                 if(i < list.size() - 1)
                 str_print += ",";
         }
-        str_print += "]"
+        str_print += "]";
         return str_print;
     }
 
