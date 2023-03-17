@@ -339,6 +339,7 @@ public class PolynomialSolver implements IPolynomialSolver{
             throw new Exception();
         }
     }
+    
 //comment 3beet
     @Override
     public void setPolynomial(char poly, int[][] terms) throws Exception {
@@ -351,6 +352,15 @@ public class PolynomialSolver implements IPolynomialSolver{
     @Override
     public String print(char poly) {
         // TODO Auto-generated method stub
+        ILinkedList list = listFinder(poly);
+        String str_print = "[";
+        for(int i = 0; i < list.size(); i++){
+            str_print += (char) list.get(i);
+                if(i < list.size() - 1)
+                str_print += ",";
+        }
+        str_print += "]"
+        return str_print;
         throw new UnsupportedOperationException("Unimplemented method 'print'");
     }
 
