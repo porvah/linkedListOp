@@ -369,8 +369,7 @@ public class PolynomialSolver implements IPolynomialSolver{
 
     @Override
     public void clearPolynomial(char poly) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearPolynomial'");
+        
     }
 
     @Override
