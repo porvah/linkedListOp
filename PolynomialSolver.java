@@ -232,11 +232,12 @@ interface IPolynomialSolver {
 
 
 public class PolynomialSolver implements IPolynomialSolver{
+    ILinkedList A = new DoubleLinkedList();
+    ILinkedList B = new DoubleLinkedList();
+    ILinkedList C = new DoubleLinkedList();
+    ILinkedList R = new DoubleLinkedList();
     public static void main(String[] args) {
-        ILinkedList A = new DoubleLinkedList();
-        ILinkedList B = new DoubleLinkedList();
-        ILinkedList C = new DoubleLinkedList();
-        ILinkedList R = new DoubleLinkedList();
+        
         IPolynomialSolver solver = new PolynomialSolver();
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
@@ -306,8 +307,7 @@ public class PolynomialSolver implements IPolynomialSolver{
 
     @Override
     public void setPolynomial(char poly, int[][] terms) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPolynomial'");
+   
     }
 
     @Override
