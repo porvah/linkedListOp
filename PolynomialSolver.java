@@ -214,62 +214,94 @@ class DoubleLinkedList implements ILinkedList {
 }
 
 interface IPolynomialSolver {
-    /**
-    * Set polynomial terms (coefficients & exponents)
-    * @param poly: name of the polynomial
-    * @param terms: array of [coefficients][exponents]
-    */
+    
     void setPolynomial(char poly, int[][] terms);
   
-    /**
-    * Print the polynomial in ordered human readable representation
-    * @param poly: name of the polynomial
-    * @return: polynomial in the form like 27x^2+x-1
-    */
     String print(char poly);
   
-    /**
-    * Clear the polynomial
-    * @param poly: name of the polynomial
-    */
-      void clearPolynomial(char poly);
+    void clearPolynomial(char poly);
   
-    /**
-    * Evaluate the polynomial
-    * @param poly: name of the polynomial
-    * @param value: the polynomial constant value
-    * @return the value of the polynomial
-    */
     float evaluatePolynomial(char poly, float value);
   
-    /**
-    * Add two polynomials
-    * @param poly1: first polynomial
-    * @param poly2: second polynomial
-    * @return the result polynomial
-    */
     int[][] add(char poly1, char poly2);
-  
-    /**
-    * Subtract two polynomials
-    * @param poly1: first polynomial
-    * @param poly2: second polynomial
-    * @return the result polynomial*/
+
     int[][] subtract(char poly1, char poly2);
-  
-    /**
-    * Multiply two polynomials
-    * @param poly1: first polynomial
-    * @param poly2: second polynomial
-    * @return: the result polynomial
-    */
+
     int[][] multiply(char poly1, char poly2);
 }
 
 
 public class PolynomialSolver implements IPolynomialSolver{
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        ILinkedList A = new DoubleLinkedList();
+        ILinkedList B = new DoubleLinkedList();
+        ILinkedList C = new DoubleLinkedList();
+        ILinkedList R = new DoubleLinkedList();
+        IPolynomialSolver solver = new PolynomialSolver();
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String str = sc.nextLine();
+            switch(str){
+                case "set":
+                    char setPolyChar = sc.nextLine().toCharArray()[0];
+                    String setstr = sc.nextLine();
+                    
+                    String[] setString = setstr.replace("[", "").replace("]", "").split(",");
+                    int[][] setArr = new int[setString.length][2];
+                    if(!str.equals("[]")){
+                        for(int i = 0; i < setString.length; i++){
+                            setArr[i][0] = Integer.parseInt(setString[i]);
+                            setArr[i][1] = setString.length - 1 - i;
+                        }
+                    }
+                    solver.setPolynomial(setPolyChar, setArr);
+                    break;
+                case "print":
+                    char printPolyChar = sc.nextLine().toCharArray()[0];
+                    System.out.print(solver.print(printPolyChar));
+                    break;
+                case "add":
+                    char addCharA = sc.nextLine().toCharArray()[0];
+                    char addCharB = sc.nextLine().toCharArray()[0];
+                    try{
+                        int[][] addRes = solver.add(addCharA, addCharB);
+                        solver.setPolynomial('R', addRes);
+                        System.out.print(solver.print('R'));
+                    }catch(Exception e){System.out.print("Error");}
+                    break;
+                case "sub":
+                    char subCharA = sc.nextLine().toCharArray()[0];
+                    char subCharB = sc.nextLine().toCharArray()[0];
+                    try{
+                        int[][] subRes = solver.subtract(subCharA, subCharB);
+                        solver.setPolynomial('R', subRes);
+                        System.out.print(solver.print('R'));
+                    }catch(Exception e){System.out.print("Error");}
+                    break;
+                case "mult":
+                    char multCharA = sc.nextLine().toCharArray()[0];
+                    char multCharB = sc.nextLine().toCharArray()[0];
+                    try{
+                        int[][] multRes = solver.multiply(multCharA, multCharB);
+                        solver.setPolynomial('R', multRes);
+                        System.out.print(solver.print('R'));
+                    }catch(Exception e){System.out.print("Error");}
+                    break;
+                case "clear":
+                    char clearChar = sc.nextLine().toCharArray()[0];
+                    solver.clearPolynomial(clearChar);
+                    solver.print(clearChar);
+                    break;
+                case "eval":
+                    char evalChar = sc.nextLine().toCharArray()[0];
+                    float evalValue = sc.nextFloat();
+                    System.out.print(solver.evaluatePolynomial(evalChar, evalValue));
+                    break;
+                default:
+                    System.out.print("Error");
+            }
+        }
+        sc.close();
     }
 
     @Override
