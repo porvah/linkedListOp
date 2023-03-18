@@ -247,7 +247,7 @@ public class PolynomialSolver implements IPolynomialSolver {
     public static void main(String[] args) throws Exception {
 
         IPolynomialSolver solver = new PolynomialSolver();
-        Scanner sc = new Scanner(System.in); 
+        Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String str = sc.nextLine();
             try {
@@ -299,7 +299,7 @@ public class PolynomialSolver implements IPolynomialSolver {
                     case "eval":
                         char evalChar = sc.nextLine().toCharArray()[0];
                         float evalValue = sc.nextFloat();
-                        System.out.println((int)solver.evaluatePolynomial(evalChar, evalValue));
+                        System.out.println((int) solver.evaluatePolynomial(evalChar, evalValue));
                         break;
                     default:
                         throw new Exception();
@@ -364,33 +364,53 @@ public class PolynomialSolver implements IPolynomialSolver {
             throw new IllegalStateException();
         }
         String str_print = "";
-        boolean null_pol = true;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) != 0){
-                null_pol = false;
-                break;
+            if (i == list.size() - 1) {
+                if (list.get(i) < 0) {
+                    str_print += String.valueOf(list.get(i));
+                } else if (list.get(i) > 0) {
+                    str_print += "+" + String.valueOf(list.get(i));
+                }
+            } else if (i == list.size() - 2) {
+                if (list.get(i) < 0) {
+                    if (list.get(i) != -1) {
+                        str_print += String.valueOf(list.get(i)) + "x";
+                    } else {
+                        str_print += "-" + "x";
+                    }
+
+                } else if (list.get(i) > 0) {
+                    str_print += "+";
+                    if (list.get(i) != 1)
+                        str_print += String.valueOf(list.get(i));
+                    str_print += "x";
+                }
+            } else {
+                if (list.get(i) < 0) {
+                    if (list.get(i) == -1) {
+                        str_print += "-" + "x^" + String.valueOf(list.size() - 1 - i);
+                    } else {
+                        str_print += String.valueOf(list.get(i)) + "x^" + String.valueOf(list.size() - 1 - i);
+                    }
+
+                } else if (list.get(i) > 0) {
+                    if (i != 0) {
+                        str_print += "+";
+                    }
+                    if (list.get(i) == 1) {
+                        str_print += "x^" + String.valueOf(list.size() - 1 - i);
+                    } else {
+                        str_print += String.valueOf(list.get(i)) + "x^" + String.valueOf(list.size() - 1 - i);
+                    }
+
+                }
             }
         }
-        if (null_pol)
-            str_print += "0";
-        else {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) != 1 && list.get(i) != 0) {
-                    if (list.get(i) != -1 || i == list.size() - 1)
-                        str_print += String.valueOf(list.get(i));
-                    else
-                        str_print += "-";
-                }
-                if (i < list.size() - 1 && list.get(i) != 0) {
-                    str_print += "x";
-                    if (list.size() - i - 1 > 1)
-                        str_print += "^" + String.valueOf(list.size() - i - 1);
-                    if (list.get(i + 1) >= 0)
-                        str_print += "+";
-                }
-                if (list.get(i) == 1 && i == list.size() - 1)
-                str_print += "1";
-            }
+        if (str_print.equals("")) {
+            str_print = "0";
+        }
+        if (str_print.charAt(0) == '+') {
+            str_print = str_print.substring(1);
         }
         return str_print;
     }
@@ -407,17 +427,19 @@ public class PolynomialSolver implements IPolynomialSolver {
     }
 
     @Override
-    public float evaluatePolynomial(char poly, float value) throws Exception{
+    public float evaluatePolynomial(char poly, float value) throws Exception {
         // TODO Auto-generated method stub
         float result = 0;
         ILinkedList list = new DoubleLinkedList();
-        try{
+        try {
             list = listFinder(poly);
-        }catch (Exception e){ throw new Exception();}
-        if(list.isEmpty())
-        throw new Exception();
-        for(int i = 0; i < list.size(); i++)
-            result += list.get(i) * Math.pow(value , list.size() - 1 -i); 
+        } catch (Exception e) {
+            throw new Exception();
+        }
+        if (list.isEmpty())
+            throw new Exception();
+        for (int i = 0; i < list.size(); i++)
+            result += list.get(i) * Math.pow(value, list.size() - 1 - i);
         return result;
     }
 
