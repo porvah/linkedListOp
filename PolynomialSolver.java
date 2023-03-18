@@ -388,6 +388,8 @@ public class PolynomialSolver implements IPolynomialSolver {
                     if (list.get(i + 1) >= 0)
                         str_print += "+";
                 }
+                if (list.get(i) == 1 && i == list.size() - 1)
+                str_print += "1";
             }
         }
         return str_print;
