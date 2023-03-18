@@ -244,10 +244,10 @@ public class PolynomialSolver implements IPolynomialSolver {
     ILinkedList C = new DoubleLinkedList();
     ILinkedList R = new DoubleLinkedList();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         IPolynomialSolver solver = new PolynomialSolver();
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); 
         while (sc.hasNext()) {
             String str = sc.nextLine();
             try {
@@ -302,7 +302,7 @@ public class PolynomialSolver implements IPolynomialSolver {
                         System.out.println((int)solver.evaluatePolynomial(evalChar, evalValue));
                         break;
                     default:
-                        System.out.println("Error");
+                        throw new Exception();
                 }
             } catch (Exception e) {
                 System.out.println("Error");
@@ -364,10 +364,10 @@ public class PolynomialSolver implements IPolynomialSolver {
             throw new IllegalStateException();
         }
         String str_print = "";
-        boolean null_pol = false;
+        boolean null_pol = true;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == 0) {
-                null_pol = true;
+            if (list.get(i) != 0){
+                null_pol = false;
                 break;
             }
         }
@@ -376,7 +376,7 @@ public class PolynomialSolver implements IPolynomialSolver {
         else {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) != 1 && list.get(i) != 0) {
-                    if (list.get(i) != -1)
+                    if (list.get(i) != -1 || i == list.size() - 1)
                         str_print += String.valueOf(list.get(i));
                     else
                         str_print += "-";
