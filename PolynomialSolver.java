@@ -299,7 +299,7 @@ public class PolynomialSolver implements IPolynomialSolver {
                     case "eval":
                         char evalChar = sc.nextLine().toCharArray()[0];
                         float evalValue = sc.nextFloat();
-                        System.out.println(solver.evaluatePolynomial(evalChar, evalValue));
+                        System.out.println((int)solver.evaluatePolynomial(evalChar, evalValue));
                         break;
                     default:
                         System.out.println("Error");
