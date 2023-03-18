@@ -229,7 +229,7 @@ interface IPolynomialSolver {
 
     void clearPolynomial(char poly) throws Exception;
 
-    float evaluatePolynomial(char poly, float value);
+    float evaluatePolynomial(char poly, float value) throws Exception;
 
     int[][] add(char poly1, char poly2) throws Exception;
 
@@ -405,9 +405,18 @@ public class PolynomialSolver implements IPolynomialSolver {
     }
 
     @Override
-    public float evaluatePolynomial(char poly, float value) {
+    public float evaluatePolynomial(char poly, float value) throws Exception{
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'evaluatePolynomial'");
+        float result = 0;
+        ILinkedList list = new DoubleLinkedList();
+        try{
+            list = listFinder(poly);
+        }catch (Exception e){ throw new Exception();}
+        if(list.isEmpty())
+        throw new Exception();
+        for(int i = 0; i < list.size(); i++)
+            result += list.get(i) * Math.pow(value , list.size() - 1 -i); 
+        return result;
     }
 
     @Override
