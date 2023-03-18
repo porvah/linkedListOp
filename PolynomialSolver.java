@@ -223,7 +223,7 @@ interface IPolynomialSolver {
   
     float evaluatePolynomial(char poly, float value);
   
-    int[][] add(char poly1, char poly2);
+    int[][] add(char poly1, char poly2) throws Exception;
 
     int[][] subtract(char poly1, char poly2);
 
@@ -357,13 +357,18 @@ public class PolynomialSolver implements IPolynomialSolver{
         try{
             list = listFinder(poly);
         }catch(Exception e){throw new Exception();}
-        String str_print = "[";
+        String str_print = "";
         for(int i = 0; i < list.size(); i++){
+            if(list.get(i) != 1 && list.get(i) != 0)
             str_print += String.valueOf( list.get(i));
-                if(i < list.size() - 1)
-                str_print += ",";
+                if(i < list.size() - 1 && list.get(i) != 0){
+                str_print +=  "x";
+                if(list.size() - i - 1 > 1)
+                str_print += "^" + String.valueOf(list.size() - i - 1);
+                if(list.get(i+1) >= 0)
+                str_print += "+";
+                }
         }
-        str_print += "]";
         return str_print;
     }
 
@@ -383,9 +388,42 @@ public class PolynomialSolver implements IPolynomialSolver{
     }
 
     @Override
-    public int[][] add(char poly1, char poly2) {
+    public int[][] add(char poly1, char poly2) throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        ILinkedList list_1 = new DoubleLinkedList();
+        ILinkedList list_2 = new DoubleLinkedList();
+        try{
+            list_1 = listFinder(poly1);
+            list_2 = listFinder(poly2);
+        }catch(Exception e){throw new Exception();}
+        int i = 0;
+        int size = 0;
+        if(list_1.size() <= list_2.size())
+            size = list_2.size();
+        else
+            size = list_1.size();
+
+        int [][] sum = new int [size][2];
+        while(i < list_1.size() && i < list_2.size()){
+            sum [size - i - 1][0] = list_1.get(list_1.size() - i - 1) +  list_2.get(list_2.size() - i - 1);
+            sum [size - i - 1][1] = i;
+            i++;
+        }
+        if(i != list_1.size()){
+            while(i < list_1.size() ){
+                sum [size - i - 1][0] = list_1.get(list_1.size() - i - 1);
+                sum [size - i - 1][1] = i;
+                i++;
+        }
+        }
+        else{
+            while(i < list_2.size() ){
+                sum [size - i - 1][0] = list_2.get(list_2.size() - i - 1);
+                sum [size - i - 1][1] = i;
+                i++;
+            }
+        }
+        return sum;
     }
 
     @Override
