@@ -375,18 +375,14 @@ public class PolynomialSolver implements IPolynomialSolver {
             str_print += "0";
         else {
             for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) != 1 && list.get(i) != 0) {
-                    if (list.get(i) != -1 || i == list.size() - 1)
-                        str_print += String.valueOf(list.get(i));
-                    else
-                        str_print += "-";
-                }
+                if (list.get(i) != 1 && list.get(i) != 0) 
+                    str_print += String.valueOf(list.get(i));
                 if (i < list.size() - 1 && list.get(i) != 0) {
                     str_print += "x";
-                    if (list.size() - i - 1 > 1)
-                        str_print += "^" + String.valueOf(list.size() - i - 1);
-                    if (list.get(i + 1) >= 0)
-                        str_print += "+";
+                        if (list.size() - i - 1 > 1)
+                            str_print += "^" + String.valueOf(list.size() - i - 1);
+                        if (list.get(i + 1) >= 0)
+                            str_print += "+";
                 }
                 if (list.get(i) == 1 && i == list.size() - 1)
                 str_print += "1";
