@@ -364,53 +364,29 @@ public class PolynomialSolver implements IPolynomialSolver {
             throw new IllegalStateException();
         }
         String str_print = "";
+        boolean null_pol = true;
         for (int i = 0; i < list.size(); i++) {
-            if (i == list.size() - 1) {
-                if (list.get(i) < 0) {
-                    str_print += String.valueOf(list.get(i));
-                } else if (list.get(i) > 0) {
-                    str_print += "+" + String.valueOf(list.get(i));
-                }
-            } else if (i == list.size() - 2) {
-                if (list.get(i) < 0) {
-                    if (list.get(i) != -1) {
-                        str_print += String.valueOf(list.get(i)) + "x";
-                    } else {
-                        str_print += "-" + "x";
-                    }
-
-                } else if (list.get(i) > 0) {
-                    str_print += "+";
-                    if (list.get(i) != 1)
-                        str_print += String.valueOf(list.get(i));
-                    str_print += "x";
-                }
-            } else {
-                if (list.get(i) < 0) {
-                    if (list.get(i) == -1) {
-                        str_print += "-" + "x^" + String.valueOf(list.size() - 1 - i);
-                    } else {
-                        str_print += String.valueOf(list.get(i)) + "x^" + String.valueOf(list.size() - 1 - i);
-                    }
-
-                } else if (list.get(i) > 0) {
-                    if (i != 0) {
-                        str_print += "+";
-                    }
-                    if (list.get(i) == 1) {
-                        str_print += "x^" + String.valueOf(list.size() - 1 - i);
-                    } else {
-                        str_print += String.valueOf(list.get(i)) + "x^" + String.valueOf(list.size() - 1 - i);
-                    }
-
-                }
+            if (list.get(i) != 0) {
+                null_pol = false;
+                break;
             }
         }
-        if (str_print.equals("")) {
-            str_print = "0";
-        }
-        if (str_print.charAt(0) == '+') {
-            str_print = str_print.substring(1);
+        if (null_pol)
+            str_print += "0";
+        else {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) != 1 && list.get(i) != 0)
+                    str_print += String.valueOf(list.get(i));
+                if (i < list.size() - 1 && list.get(i) != 0) {
+                    str_print += "x";
+                    if (list.size() - i - 1 > 1)
+                        str_print += "^" + String.valueOf(list.size() - i - 1);
+                    if (list.get(i + 1) >= 0)
+                        str_print += "+";
+                }
+                if (list.get(i) == 1 && i == list.size() - 1)
+                    str_print += "1";
+            }
         }
         return str_print;
     }
